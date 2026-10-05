@@ -30,6 +30,10 @@ app.get("/health", (_request, response) => {
   response.status(200).json({ status: "ok", database: mongoose.connection.readyState === 1 ? "connected" : "disconnected" });
 });
 
+app.get("/", (_req, res) => {
+  res.redirect("/graphql");
+});
+
 app.use("/graphql", express.json(), expressMiddleware(apollo));
 
 const httpServer = app.listen(port, "0.0.0.0", () => {
